@@ -58,11 +58,11 @@ public class ImporteAlumnoDAOImpl implements IImporteAlumnoDAO{
 		jdbcTemplate.update(sql,importealumno.getCod_alumno(),importealumno.getCod_programa(),importealumno.getCod_concepto(),importealumno.getImporte());
 
 		// Fetch ImporteAlumno id
-		sql = "SELECT cod_alumno FROM importe_alumno WHERE cod_alumno = ?";
-		int cod_alumno = jdbcTemplate.queryForObject(sql, Integer.class, importealumno.getCod_alumno());
+		//sql = "SELECT cod_alumno FROM importe_alumno WHERE cod_alumno = ?";
+		//int cod_alumno = jdbcTemplate.queryForObject(sql, Integer.class, importealumno.getCod_alumno());
 
 		// Set ImporteAlumno id
-		importealumno.setCod_alumno(cod_alumno);
+		//importealumno.setCod_alumno(cod_alumno);
 	}
         
         @Override
