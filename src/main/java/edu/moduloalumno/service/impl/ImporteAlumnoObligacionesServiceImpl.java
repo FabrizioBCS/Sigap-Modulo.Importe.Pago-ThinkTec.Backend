@@ -19,9 +19,8 @@ public class ImporteAlumnoObligacionesServiceImpl implements IImporteAlumnoOblig
 	}
 	
 	@Override
-	public ImporteAlumnoObligaciones getImporteAlumnoObligacionesImporte(int cod_alumno, int cod_programa, int id_tobligacion_estado) {
-		ImporteAlumnoObligaciones ImporteAlumnoObligaciones = ImporteAlumnoObligacionesDAO.getImporteAlumnoObligacionesImporte(cod_alumno,cod_programa,id_tobligacion_estado);
-		return ImporteAlumnoObligaciones;
+	public List<ImporteAlumnoObligaciones> getImporteAlumnoObligacionesImporte(int cod_alumno, int cod_programa, int id_tobligacion_estado) {
+		return ImporteAlumnoObligacionesDAO.getImporteAlumnoObligacionesImporte(cod_alumno, cod_programa, id_tobligacion_estado);
 	}
 	
 	@Override

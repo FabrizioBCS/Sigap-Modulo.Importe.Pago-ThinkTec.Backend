@@ -8,7 +8,7 @@ public interface IImporteAlumnoObligacionesDAO {
 	
 	List<ImporteAlumnoObligaciones> getAllImporteAlumnosObligaciones();
 	
-	ImporteAlumnoObligaciones getImporteAlumnoObligacionesImporte(int cod_alumno,int cod_programa, int id_tobligacion_estado);
+	List<ImporteAlumnoObligaciones> getImporteAlumnoObligacionesImporte(int cod_alumno,int cod_programa, int id_tobligacion_estado);
     
     void addImporteAlumnoObligaciones(ImporteAlumnoObligaciones importealumnoobligaciones);
     

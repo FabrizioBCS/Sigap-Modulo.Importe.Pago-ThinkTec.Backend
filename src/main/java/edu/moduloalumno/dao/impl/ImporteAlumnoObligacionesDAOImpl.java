@@ -27,11 +27,16 @@ public class ImporteAlumnoObligacionesDAOImpl implements IImporteAlumnoObligacio
 	}
         
         @Override
-    	public ImporteAlumnoObligaciones getImporteAlumnoObligacionesImporte(int cod_alumno,int cod_programa, int id_tobligacion_estado) {
+    	public List<ImporteAlumnoObligaciones> getImporteAlumnoObligacionesImporte(int cod_alumno,int cod_programa, int id_tobligacion_estado) {
     		String sql = "SELECT cod_alumno, cod_programa, cod_concepto, importe, id_tipo_obligacion, id_moneda, id_tobligacion_estado, descripcion FROM importe_alumno WHERE cod_alumno = ? and cod_programa = ? and id_tobligacion_estado = ?";
+    		//String sql = "SELECT cod_alumno, cod_programa, cod_concepto, importe, id_tipo_obligacion, id_moneda, id_tobligacion_estado, descripcion FROM importe_alumno";
+    		
     		RowMapper<ImporteAlumnoObligaciones> rowMapper = new BeanPropertyRowMapper<ImporteAlumnoObligaciones>(ImporteAlumnoObligaciones.class);
-    		ImporteAlumnoObligaciones importealumnoobligaciones = jdbcTemplate.queryForObject(sql, rowMapper, cod_alumno,cod_programa,id_tobligacion_estado);
-    		return importealumnoobligaciones;
+    		List<ImporteAlumnoObligaciones> importealumno = jdbcTemplate.query(sql, rowMapper, cod_alumno,cod_programa,id_tobligacion_estado);
+    		return importealumno;
+    		
+    		//RowMapper<ImporteAlumnoObligaciones> rowMapper = new ImporteAlumnoObligacionesRowMapper();
+    		//return this.jdbcTemplate.query(sql, rowMapper);
     	}
         
         @Override

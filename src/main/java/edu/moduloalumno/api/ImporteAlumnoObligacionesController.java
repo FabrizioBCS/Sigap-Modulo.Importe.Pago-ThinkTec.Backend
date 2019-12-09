@@ -54,25 +54,28 @@ public class ImporteAlumnoObligacionesController {
 	}
         
         @RequestMapping(value = "/search/{cod_alumno}/{cod_programa}/{id_tobligacion_estado}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    	public ResponseEntity<ImporteAlumnoObligaciones> getImporteAlumnoObligacionesImporte(@PathVariable("cod_alumno") Integer cod_alumno,@PathVariable("cod_programa") Integer cod_programa,@PathVariable("id_tobligacion_estado") Integer id_tobligacion_estado) {
+    	public ResponseEntity<List<ImporteAlumnoObligaciones>> getImporteAlumnoObligacionesImporte(@PathVariable("cod_alumno") Integer cod_alumno,@PathVariable("cod_programa") Integer cod_programa,@PathVariable("id_tobligacion_estado") Integer id_tobligacion_estado) {
     		logger.info("> getImporteAlumnoObligacionesImporte [ImporteAlumnoObligaciones]");
-
-    		ImporteAlumnoObligaciones importe = null;
-
+    		
+    		List<ImporteAlumnoObligaciones> list = null;
+    		//Integer coalu = 18207012;
+    		//Integer copro = 7;
+    		//Integer coidt = 1;
+    		
     		try {
-    			importe = service.getImporteAlumnoObligacionesImporte(cod_alumno, cod_programa, id_tobligacion_estado);
+    			list = service.getImporteAlumnoObligacionesImporte(cod_alumno, cod_programa, id_tobligacion_estado);
     			
-    			if (importe == null) {
-    				importe = new ImporteAlumnoObligaciones();
+    			if (list == null) {
+    				list = new ArrayList<ImporteAlumnoObligaciones>();
     			}
     		} catch (Exception e) {
     			logger.error("Unexpected Exception caught.", e);
-    			return new ResponseEntity<ImporteAlumnoObligaciones>(importe, HttpStatus.INTERNAL_SERVER_ERROR);
+    			return new ResponseEntity<List<ImporteAlumnoObligaciones>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
     		}
     		
 
     		logger.info("< getImporteAlumnoObligacionesImporte [ImporteAlumnoObligaciones]");
-    		return new ResponseEntity<ImporteAlumnoObligaciones>(importe, HttpStatus.OK);
+    		return new ResponseEntity<List<ImporteAlumnoObligaciones>>(list, HttpStatus.OK);
     	} 
         
         @PostMapping(value = "/add", consumes = "application/json",produces = "application/json")
