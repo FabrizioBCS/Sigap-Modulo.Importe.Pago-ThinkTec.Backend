@@ -58,9 +58,6 @@ public class ImporteAlumnoObligacionesController {
     		logger.info("> getImporteAlumnoObligacionesImporte [ImporteAlumnoObligaciones]");
     		
     		List<ImporteAlumnoObligaciones> list = null;
-    		//Integer coalu = 18207012;
-    		//Integer copro = 7;
-    		//Integer coidt = 1;
     		
     		try {
     			list = service.getImporteAlumnoObligacionesImporte(cod_alumno, cod_programa, id_tobligacion_estado);
