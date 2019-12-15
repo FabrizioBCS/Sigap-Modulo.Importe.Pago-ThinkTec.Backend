@@ -1,10 +1,15 @@
 package edu.moduloalumno.dao.impl;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,8 +43,12 @@ public class ImporteAlumnoObligacionesDAOImpl implements IImporteAlumnoObligacio
         @Override
 	public void addImporteAlumnoObligaciones(ImporteAlumnoObligaciones importealumnoobligaciones) {
 		// Add ImporteAlumno
+        	
+        	
 		String sql = "INSERT INTO importe_alumno (cod_alumno, cod_programa, cod_concepto, importe, id_tipo_obligacion, id_moneda, id_tobligacion_estado, descripcion) values (?,?,?,?,?,?,?,?)";
 		jdbcTemplate.update(sql,importealumnoobligaciones.getCod_alumno(),importealumnoobligaciones.getCod_programa(),importealumnoobligaciones.getCod_concepto(),importealumnoobligaciones.getImporte(),importealumnoobligaciones.getId_tipo_obligacion(),importealumnoobligaciones.getId_moneda(),importealumnoobligaciones.getId_tobligacion_estado(),importealumnoobligaciones.getDescripcion());
+		
+		
 	}
         
         @Override

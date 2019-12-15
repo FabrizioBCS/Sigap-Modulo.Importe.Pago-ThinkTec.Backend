@@ -1,10 +1,13 @@
 package edu.moduloalumno.dao.impl;
 
+import java.sql.PreparedStatement;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,14 +58,20 @@ public class ImporteAlumnoDAOImpl implements IImporteAlumnoDAO{
 	public void addImporteAlumno(ImporteAlumno importealumno) {
 		// Add ImporteAlumno
 		String sql = "INSERT INTO importe_alumno (cod_alumno, cod_programa, cod_concepto, importe) values (?,?, ?,?)";
-		jdbcTemplate.update(sql,importealumno.getCod_alumno(),importealumno.getCod_programa(),importealumno.getCod_concepto(),importealumno.getImporte());
-
-		// Fetch ImporteAlumno id
-		//sql = "SELECT cod_alumno FROM importe_alumno WHERE cod_alumno = ?";
-		//int cod_alumno = jdbcTemplate.queryForObject(sql, Integer.class, importealumno.getCod_alumno());
-
-		// Set ImporteAlumno id
-		//importealumno.setCod_alumno(cod_alumno);
+	    jdbcTemplate.update(sql,importealumno.getCod_alumno(),importealumno.getCod_programa(),importealumno.getCod_concepto(),importealumno.getImporte());
+		/*
+	    KeyHolder keyHolder = new GeneratedKeyHolder();
+	    
+	    jdbcTemplate.update(connection -> {
+	        PreparedStatement ps = connection
+	          .prepareStatement(sql);
+	          ps.setInt(1,importealumno.getCod_alumno());
+	          ps.setInt(2,importealumno.getCod_programa());
+	          ps.setInt(3,importealumno.getCod_concepto());
+	          ps.setDouble(4,importealumno.getImporte());
+	          return ps;
+	        }, keyHolder);
+	    */
 	}
         
         @Override
