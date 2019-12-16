@@ -25,18 +25,18 @@ public class ImporteAlumnoObligacionesDAOImpl implements IImporteAlumnoObligacio
     
         @Override
 	public List<ImporteAlumnoObligaciones> getAllImporteAlumnosObligaciones() {
-		String sql = "SELECT cod_alumno, cod_programa, cod_concepto, importe, id_tipo_obligacion, id_moneda, id_tobligacion_estado, descripcion FROM importe_alumno";
+		String sql = "SELECT id_importe_alumno_obligaciones,cod_alumno, cod_programa, cod_concepto, importe, id_tipo_obligacion, id_moneda, id_tobligacion_estado, descripcion FROM importe_alumno_obligaciones";
 		
 		RowMapper<ImporteAlumnoObligaciones> rowMapper = new ImporteAlumnoObligacionesRowMapper();
 		return this.jdbcTemplate.query(sql, rowMapper);
 	}
         
         @Override
-    	public List<ImporteAlumnoObligaciones> getImporteAlumnoObligacionesImporte(int cod_alumno,int cod_programa, int id_tobligacion_estado) {
-    		String sql = "SELECT cod_alumno, cod_programa, cod_concepto, importe, id_tipo_obligacion, id_moneda, id_tobligacion_estado, descripcion FROM importe_alumno WHERE cod_alumno = ? and cod_programa = ? and id_tobligacion_estado = ?";
+    	public List<ImporteAlumnoObligaciones> getImporteAlumnoObligacionesImporte(int cod_alumno,int cod_programa) {
+    		String sql = "SELECT id_importe_alumno_obligaciones,cod_alumno, cod_programa, cod_concepto, importe, id_tipo_obligacion, id_moneda, id_tobligacion_estado, descripcion FROM importe_alumno_obligaciones WHERE cod_alumno = ? and cod_programa = ? order by id_tobligacion_estado";
     		
     		RowMapper<ImporteAlumnoObligaciones> rowMapper = new BeanPropertyRowMapper<ImporteAlumnoObligaciones>(ImporteAlumnoObligaciones.class);
-    		List<ImporteAlumnoObligaciones> importealumno = jdbcTemplate.query(sql, rowMapper, cod_alumno,cod_programa,id_tobligacion_estado);
+    		List<ImporteAlumnoObligaciones> importealumno = jdbcTemplate.query(sql, rowMapper, cod_alumno,cod_programa);
     		return importealumno;
     	}
         
@@ -45,7 +45,7 @@ public class ImporteAlumnoObligacionesDAOImpl implements IImporteAlumnoObligacio
 		// Add ImporteAlumno
         	
         	
-		String sql = "INSERT INTO importe_alumno (cod_alumno, cod_programa, cod_concepto, importe, id_tipo_obligacion, id_moneda, id_tobligacion_estado, descripcion) values (?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO importe_alumno_obligaciones (cod_alumno, cod_programa, cod_concepto, importe, id_tipo_obligacion, id_moneda, id_tobligacion_estado, descripcion) values (?,?,?,?,?,?,?,?)";
 		jdbcTemplate.update(sql,importealumnoobligaciones.getCod_alumno(),importealumnoobligaciones.getCod_programa(),importealumnoobligaciones.getCod_concepto(),importealumnoobligaciones.getImporte(),importealumnoobligaciones.getId_tipo_obligacion(),importealumnoobligaciones.getId_moneda(),importealumnoobligaciones.getId_tobligacion_estado(),importealumnoobligaciones.getDescripcion());
 		
 		
@@ -53,13 +53,13 @@ public class ImporteAlumnoObligacionesDAOImpl implements IImporteAlumnoObligacio
         
         @Override
 	public void updateImporteAlumnoObligaciones(ImporteAlumnoObligaciones importealumnoobligaciones) {
-		String sql = "UPDATE importe_alumno SET importe = ?, id_tipo_obligacion = ?, id_moneda = ?, id_tobligacion_estado = ?, descripcion = ? WHERE cod_alumno = ? and cod_programa = ? and cod_concepto = ?";
-		jdbcTemplate.update(sql,importealumnoobligaciones.getImporte(),importealumnoobligaciones.getId_tipo_obligacion(),importealumnoobligaciones.getId_moneda(),importealumnoobligaciones.getId_tobligacion_estado(),importealumnoobligaciones.getDescripcion(),importealumnoobligaciones.getCod_alumno(),importealumnoobligaciones.getCod_programa(),importealumnoobligaciones.getCod_concepto());
+		String sql = "UPDATE importe_alumno_obligaciones SET importe = ?, id_tipo_obligacion = ?, id_moneda = ?, id_tobligacion_estado = ?, descripcion = ? WHERE id_importe_alumno_obligaciones = ?";
+		jdbcTemplate.update(sql,importealumnoobligaciones.getImporte(),importealumnoobligaciones.getId_tipo_obligacion(),importealumnoobligaciones.getId_moneda(),importealumnoobligaciones.getId_tobligacion_estado(),importealumnoobligaciones.getDescripcion(),importealumnoobligaciones.getId_importe_alumno_obligaciones());
     }
         
         @Override
 	public void deleteImporteAlumnoObligaciones(int cod_alumno) {
-		String sql = "DELETE FROM importe_alumno WHERE cod_alumno = ?";
+		String sql = "DELETE FROM importe_alumno_obligaciones WHERE cod_alumno = ?";
 		jdbcTemplate.update(sql, cod_alumno);
 	}
 }

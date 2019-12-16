@@ -53,14 +53,14 @@ public class ImporteAlumnoObligacionesController {
 		return new ResponseEntity<List<ImporteAlumnoObligaciones>>(list, HttpStatus.OK);
 	}
         
-        @RequestMapping(value = "/search/{cod_alumno}/{cod_programa}/{id_tobligacion_estado}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    	public ResponseEntity<List<ImporteAlumnoObligaciones>> getImporteAlumnoObligacionesImporte(@PathVariable("cod_alumno") Integer cod_alumno,@PathVariable("cod_programa") Integer cod_programa,@PathVariable("id_tobligacion_estado") Integer id_tobligacion_estado) {
+        @RequestMapping(value = "/search/{cod_alumno}/{cod_programa}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    	public ResponseEntity<List<ImporteAlumnoObligaciones>> getImporteAlumnoObligacionesImporte(@PathVariable("cod_alumno") Integer cod_alumno,@PathVariable("cod_programa") Integer cod_programa) {
     		logger.info("> getImporteAlumnoObligacionesImporte [ImporteAlumnoObligaciones]");
     		
     		List<ImporteAlumnoObligaciones> list = null;
     		
     		try {
-    			list = service.getImporteAlumnoObligacionesImporte(cod_alumno, cod_programa, id_tobligacion_estado);
+    			list = service.getImporteAlumnoObligacionesImporte(cod_alumno, cod_programa);
     			
     			if (list == null) {
     				list = new ArrayList<ImporteAlumnoObligaciones>();
@@ -89,97 +89,5 @@ public class ImporteAlumnoObligacionesController {
         	return newimportealumnoobligaciones;
     	}
 
-        @RequestMapping(value = "/addsin", method = RequestMethod.POST)
-    	public ResponseEntity<ImporteAlumnoObligaciones> addImporteAlumnoObligaciones(){
-    		
-    		ImporteAlumnoObligaciones newimportealumnoobligaciones = new ImporteAlumnoObligaciones(404,44,44,1200.0,1,"108",1,"casi");
-    		
-    		try {
-                        service.addImporteAlumnoObligaciones(newimportealumnoobligaciones);
-    		} catch (Exception e) {
-    			return new ResponseEntity<ImporteAlumnoObligaciones>(HttpStatus.INTERNAL_SERVER_ERROR);
-    		}
-
-    		return new ResponseEntity<ImporteAlumnoObligaciones>(newimportealumnoobligaciones, HttpStatus.CREATED);
-    	}
-        
-        @RequestMapping(value = "/addu", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-    	public ResponseEntity<ImporteAlumnoObligaciones> addImporteAlumnoObligaciones(@RequestBody ImporteAlumnoObligaciones newimportealumnoobligaciones){
-
-    		logger.info("> addImporteAlumnoObligaciones [ImporteAlumnoObligaciones]");
-    		
-    		int coalu = newimportealumnoobligaciones.getCod_alumno();
-    		int copro = newimportealumnoobligaciones.getCod_programa();
-    		int cocon = newimportealumnoobligaciones.getCod_concepto();
-    		double im = newimportealumnoobligaciones.getImporte();
-    		int idtipoo = newimportealumnoobligaciones.getId_tipo_obligacion();
-    		String idmo = String.valueOf(newimportealumnoobligaciones.getId_moneda());
-    		int idtoest = newimportealumnoobligaciones.getId_tobligacion_estado();
-    		String desc = String.valueOf(newimportealumnoobligaciones.getDescripcion());
-    		
-    		ImporteAlumnoObligaciones importealumnoobligaciones = new ImporteAlumnoObligaciones(coalu,copro,cocon,im,idtipoo,idmo,idtoest,desc);
-    		
-    		try {
-                        service.addImporteAlumnoObligaciones(importealumnoobligaciones);
-    		} catch (Exception e) {
-    			return new ResponseEntity<ImporteAlumnoObligaciones>(HttpStatus.INTERNAL_SERVER_ERROR);
-    		}
-
-    		logger.info("> addImporteAlumnoObligaciones [ImporteAlumnoObligaciones]");
-    		return new ResponseEntity<ImporteAlumnoObligaciones>(importealumnoobligaciones, HttpStatus.CREATED);
-    	}
-        
-        @RequestMapping(value = "/addi", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ImporteAlumnoObligaciones> addImporteAlumnoObligaciones(
-			@RequestParam(value = "cod_alumno") Integer coalu,
-			@RequestParam("cod_programa") Integer copro,
-			@RequestParam("cod_concepto") Integer cocon,
-			@RequestParam("importe") double im,
-			@RequestParam("id_tipo_obligacion") Integer idtipoo,
-			@RequestParam("id_moneda") String idmo,
-			@RequestParam("id_tobligacion_estado") Integer idtoest,
-			@RequestParam("descripcion") String desc){
-
-		logger.info("> addImporteAlumnoObligaciones [ImporteAlumnoObligaciones]");
-			
-		ImporteAlumnoObligaciones importealumnoobligaciones = new ImporteAlumnoObligaciones(coalu,copro,cocon,im,idtipoo,idmo,idtoest,desc);
-		
-		try {
-                    service.addImporteAlumnoObligaciones(importealumnoobligaciones);
-		} catch (Exception e) {
-			return new ResponseEntity<ImporteAlumnoObligaciones>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-
-		logger.info("> addImporteAlumnoObligaciones [ImporteAlumnoObligaciones]");
-		return new ResponseEntity<ImporteAlumnoObligaciones>(importealumnoobligaciones, HttpStatus.CREATED);
-	}
-        
-        @RequestMapping(value = "/updato", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-    	public ResponseEntity<ImporteAlumnoObligaciones> updateImporteAlumnoObligaciones(@RequestBody ImporteAlumnoObligaciones newimportealumnoobligaciones) {
-
-    		logger.info("> updateImporteAlumnoObligaciones [ImporteAlumnoObligaciones]");
-    		
-    		int coalu = newimportealumnoobligaciones.getCod_alumno();
-    		int copro = newimportealumnoobligaciones.getCod_programa();
-    		int cocon = newimportealumnoobligaciones.getCod_concepto();
-    		double im = newimportealumnoobligaciones.getImporte();
-    		int idtipoo = newimportealumnoobligaciones.getId_tipo_obligacion();
-    		String idmo = newimportealumnoobligaciones.getId_moneda();
-    		int idtoest = newimportealumnoobligaciones.getId_tobligacion_estado();
-    		String desc = newimportealumnoobligaciones.getDescripcion();
-    		
-    		ImporteAlumnoObligaciones importealumnoobligaciones = new ImporteAlumnoObligaciones(coalu,copro,cocon,im,idtipoo,idmo,idtoest,desc);
-    		
-    		try {
-    			service.updateImporteAlumnoObligaciones(importealumnoobligaciones);
-                        
-           
-    		} catch (Exception e) {
-    			return new ResponseEntity<ImporteAlumnoObligaciones>(HttpStatus.INTERNAL_SERVER_ERROR);
-    		}
-
-    		logger.info("> updateImporteAlumnoObligaciones [ImporteAlumnoObligaciones]");
-    		return new ResponseEntity<ImporteAlumnoObligaciones>(importealumnoobligaciones, HttpStatus.CREATED);
-    	}
 
 }

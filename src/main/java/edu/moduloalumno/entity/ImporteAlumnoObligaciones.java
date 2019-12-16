@@ -6,6 +6,8 @@ public class ImporteAlumnoObligaciones implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
     
+	private Integer id_importe_alumno_obligaciones;
+	
     private Integer cod_alumno;
     
     private Integer cod_programa;
@@ -25,8 +27,9 @@ public class ImporteAlumnoObligaciones implements Serializable{
     public ImporteAlumnoObligaciones() {
     }
     
-    public ImporteAlumnoObligaciones(Integer cod_alumno, Integer cod_programa, Integer cod_concepto, double importe, Integer id_tipo_obligacion, String id_moneda, Integer id_tobligacion_estado, String descripcion) {
-        this.cod_alumno = cod_alumno;
+    public ImporteAlumnoObligaciones(Integer id_importe_alumno_obligaciones,Integer cod_alumno, Integer cod_programa, Integer cod_concepto, double importe, Integer id_tipo_obligacion, String id_moneda, Integer id_tobligacion_estado, String descripcion) {
+    	this.id_importe_alumno_obligaciones = id_importe_alumno_obligaciones;
+    	this.cod_alumno = cod_alumno;
         this.cod_programa = cod_programa;
         this.cod_concepto = cod_concepto;
         this.importe = importe;
@@ -35,6 +38,14 @@ public class ImporteAlumnoObligaciones implements Serializable{
         this.id_tobligacion_estado = id_tobligacion_estado;
         this.descripcion = descripcion;
     }
+    
+    public Integer getId_importe_alumno_obligaciones() {
+		return id_importe_alumno_obligaciones;
+	}
+
+	public void setId_importe_alumno_obligaciones(Integer id_importe_alumno_obligaciones) {
+		this.id_importe_alumno_obligaciones = id_importe_alumno_obligaciones;
+	}
 
 	public Integer getCod_alumno() {
 		return cod_alumno;
