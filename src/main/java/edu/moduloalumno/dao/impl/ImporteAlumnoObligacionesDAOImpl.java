@@ -53,8 +53,8 @@ public class ImporteAlumnoObligacionesDAOImpl implements IImporteAlumnoObligacio
         
         @Override
 	public void updateImporteAlumnoObligaciones(ImporteAlumnoObligaciones importealumnoobligaciones) {
-		String sql = "UPDATE importe_alumno_obligaciones SET importe = ?, id_tipo_obligacion = ?, id_moneda = ?, id_tobligacion_estado = ?, descripcion = ? WHERE id_importe_alumno_obligaciones = ?";
-		jdbcTemplate.update(sql,importealumnoobligaciones.getImporte(),importealumnoobligaciones.getId_tipo_obligacion(),importealumnoobligaciones.getId_moneda(),importealumnoobligaciones.getId_tobligacion_estado(),importealumnoobligaciones.getDescripcion(),importealumnoobligaciones.getId_importe_alumno_obligaciones());
+		String sql = "UPDATE importe_alumno_obligaciones SET cod_concepto = ?, importe = ?, id_tipo_obligacion = ?, id_moneda = ?, id_tobligacion_estado = ?, descripcion = ? WHERE id_importe_alumno_obligaciones = ?";
+		jdbcTemplate.update(sql,importealumnoobligaciones.getCod_concepto(),importealumnoobligaciones.getImporte(),importealumnoobligaciones.getId_tipo_obligacion(),importealumnoobligaciones.getId_moneda(),importealumnoobligaciones.getId_tobligacion_estado(),importealumnoobligaciones.getDescripcion(),importealumnoobligaciones.getId_importe_alumno_obligaciones());
     }
         
         @Override
